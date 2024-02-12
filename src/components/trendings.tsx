@@ -1,4 +1,6 @@
+import { allowedChannels } from "@/lib/allowedChannels";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 import React
@@ -11,31 +13,18 @@ export default function Trendings(props: {
 }) {
     return(
         <div className="flex text-white h-screen w-1/5 flex justify-center items-center">
-            <div className={`flex flex-col min-h-[70%] bg-[#903b0d] rounded-xl p-8 ${inter.className}`}>
+            <div className={`flex flex-col min-h-[70%] bg-[#903b0d] border-[1px] border-[#a97b4c] rounded-xl p-8 ${inter.className}`}>
                 <div className="flex flex-row justify-between gap-10">
-                    <span className="text-xl font-bold mb-8">Türkiye'de gündem</span>
+                    <span className="text-xl font-bold mb-8">Meraklısına kanallar</span>
                     <IoMdSettings size={24}/>
                 </div>
-                <div className="flex flex-col mb-4">
-                    <span className="font-semibold text-sm mb-1">1. Trending</span>
-                    <span className="text-xs">#128milyardolarnerde</span>
-                </div>
-                <div className="flex flex-col mb-4">
-                    <span className="font-semibold text-sm mb-1">2. Trending</span>
-                    <span className="text-xs">#128milyardolarnerde</span>
-                </div>
-                <div className="flex flex-col mb-4">
-                    <span className="font-semibold text-sm mb-1">3. Trending</span>
-                    <span className="text-xs">#128milyardolarnerde</span>
-                </div>
-                <div className="flex flex-col mb-4">
-                    <span className="font-semibold text-sm mb-1">4. Trending</span>
-                    <span className="text-xs">#128milyardolarnerde</span>
-                </div>
-                <div className="flex flex-col mb-4">
-                    <span className="font-semibold text-sm mb-1">5. Trending</span>
-                    <span className="text-xs">#128milyardolarnerde</span>
-                </div>
+                {allowedChannels.map((val , i) => {
+                    return(
+                        <Link href={`/channel/${val}`} className="flex flex-col mb-4">
+                            <span className="text-xs">{`/${val}`}</span>
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     )

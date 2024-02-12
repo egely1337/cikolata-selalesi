@@ -32,6 +32,7 @@ model Post {
   created_at DateTime @default(now())
 
   content String
+  channel String?
 
   attachments Attachment[]
   liked_by Like[]

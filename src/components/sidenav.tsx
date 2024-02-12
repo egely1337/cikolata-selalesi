@@ -29,7 +29,7 @@ export default function Sidenav() {
                 </div>
             </div>
 
-            <div onClick={() => router.push("/")} className="flex rounded-2xl hover:bg-[#672f0a] cursor-pointer duration-300 p-2 py-3 flex-row mt-12 items-center gap-2 w-64">
+            <div onClick={() => router.push("/channel/genel")} className="flex rounded-2xl hover:bg-[#672f0a] cursor-pointer duration-300 p-2 py-3 flex-row mt-12 items-center gap-2 w-64">
                 <IoMdHome size={32}/>
                 <span className={`${inter.className} text-xl font-bold ml-2`}>Anasayfa</span>
             </div>      

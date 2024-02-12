@@ -17,7 +17,7 @@ export default function UserPostArea(props: {
             >
                 <span className="text-white">{userStore.user?.username}</span>
                 <textarea
-                    placeholder="düşüncelerini boşalt" 
+                    placeholder="düşüncelerini boşalt, merak etme burada özgürsün." 
                     className="p-2 focus:outline-none hover:border-pink-600 duration-300 border rounded-xl mt-2"
                     onChange={({target}) => setContent(target.value)}    
                     value={content}

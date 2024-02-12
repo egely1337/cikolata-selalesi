@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../prisma/client";
+import prisma from "../../../../prisma/client";
 
 import Joi from "joi";
 import validate from "@/util/middlewares/validate";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "../auth/[...nextauth]";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,7 +16,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try { 
-        const post = (await prisma.user.getTodayPosts())
+        const channel_id = req.query.channel_id as string;
+        const post = await prisma.user.getChannelPosts(channel_id);
 
         return res.json({
             status: true,

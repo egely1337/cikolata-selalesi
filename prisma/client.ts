@@ -9,6 +9,7 @@ type CreatePostType = {
     content: string,
     attachments?: string[]
     session: Session | null,
+    channel: string
 }
 
 type LikePostType = {
@@ -116,7 +117,8 @@ const prisma = new PrismaClient().$extends({
                             connect: {
                                 username: user?.username 
                             }
-                        }
+                        },
+                        channel: params.channel
                     },
                     include: {
                         author: {
@@ -129,11 +131,14 @@ const prisma = new PrismaClient().$extends({
                     }
                 })
             },
-            async getTodayPosts() {
+            async getChannelPosts(channel_id: string) {
                 return JSON.parse(JSON.stringify(await prisma.post.findMany({
                     take: 50,
                     orderBy: {
                         created_at: 'desc'
+                    },
+                    where: {
+                        channel: channel_id 
                     },
                     include: {
                         author: {

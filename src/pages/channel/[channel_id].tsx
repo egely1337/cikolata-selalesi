@@ -13,6 +13,8 @@ import { IoMdSettings } from "react-icons/io";
 import Trendings from "@/components/trendings";
 import MainLayout from "@/components/main_layout";
 import UserPostArea from "@/components/user_post_area";
+import { useRouter } from "next/router";
+import Loading from "@/components/loading";
 
 
 export default function Page(props: {
@@ -23,14 +25,12 @@ export default function Page(props: {
     }
 
     const [posts, setPosts] = React.useState<PostType[]>();
-    const [content, setContent] = React.useState<string>("");
+    const router = useRouter();
 
-    const userStore = useUserStore();
-
-    async function fetchPosts() {
+    async function fetchPosts(channel_id: string) {
         setPosts([]);
 
-        fetch("/api/posts", {
+        fetch(`/api/channel/${channel_id}`, {
             method: "GET",
         }).then(async res => {
             const json = await res.json();
@@ -47,7 +47,8 @@ export default function Page(props: {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                content
+                content,
+                channel_id: router.query.channel_id
             })
         }).then(async res => {
             const json: {status: boolean, post: PostType} = await res.json();
@@ -57,19 +58,23 @@ export default function Page(props: {
     }
 
     React.useEffect(() => {
-        fetchPosts();
-    }, [])
+        const {channel_id} = router.query;
+        
+        if(channel_id) {
+            fetchPosts(channel_id as string);
+        }
+    }, [router])
 
 
     return(
         <div className="page">
             <Sidenav/>
-            <MainLayout menuName="Şelale">
+            <MainLayout menuName={`Şelale - ${router.query?.channel_id}`}>
                 <UserPostArea onClick={async (content) => {
                     sendPost(content);
                 }}/>
 
-                <div className="p-4 flex flex-col">
+                {posts ? <div className="p-4 flex flex-col">
                     {posts?.map((val, i) => {
                         return(
                             <Thread
@@ -78,7 +83,10 @@ export default function Page(props: {
                             />
                         )
                     })}
+                </div> : <div className="w-full h-full flex items-center justify-center">
+                    <Loading/>
                 </div>
+                }
             </MainLayout>
             <Trendings/>
         </div>
