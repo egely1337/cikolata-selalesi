@@ -62,7 +62,7 @@ export default function Thread(props: {
             <div className="flex flex-row p-2 items-center">
                 <img draggable={false} src={props.post.author.avatar_url} className="rounded-full" width={48} />
                 <span className={`${inter.className} ml-4 font-bold`}>{props.post.authorId}</span>
-                <span className={`${inter.className} ml-3 opacity-70`}>@{props.post.authorId} · {`${new Date(props.post.created_at).getDate()} ${MONTH_NAMES.at(new Date(props.post.created_at).getMonth())} ${new Date(props.post.created_at).getHours()}:${new Date(props.post.created_at).getMinutes()}`}</span>
+                <span className={`${inter.className} ml-3 opacity-70`}>@{props.post.authorId} · {`${new Date(props.post.created_at).getDate()} ${MONTH_NAMES.at(new Date(props.post.created_at).getMonth())} ${new Date(props.post.created_at).getHours()}:${(new Date(props.post.created_at).getMinutes() < 10) ? `0${new Date(props.post.created_at).getMinutes()}`:`${new Date(props.post.created_at).getMinutes()}`}`}</span>
             </div>
             <div className="flex flex-col p-2">
                 <p>{props.post.content}</p>

@@ -22,7 +22,7 @@ export default function Sidenav() {
             <GiChocolateBar size={72} className="mb-12 opacity-70 hover:opacity-100 ease-in-out duration-1000"/>
 
             <div className="flex flex-row gap-2 select-none">
-                <img draggable={false} src={userStore.user?.avatar_url} className="rounded-full" width={48} />
+                <img draggable={false} src={userStore.user?.avatar_url} className="rounded-full w-[48px] h-[48px]"/>
                 <div className="flex flex-col justify-center">
                     <span className={`${inter.className} text-sm`}>{userStore.user?.username}</span>
                     <span className={`${inter.className} opacity-70 text-xs`}>{`@${userStore.user?.username}`}</span>
