@@ -18,4 +18,4 @@
 <br/>
 <br/>
 
-**Çikolata Şelalesi 🍫 bir <a href="https://animekizi.org">animekizi.org</a> kuruluşudur**
+**Çikolata Şelalesi 🍫 bir <a href="https://animekizi.org">animekizi.org</a> projesidir.**
