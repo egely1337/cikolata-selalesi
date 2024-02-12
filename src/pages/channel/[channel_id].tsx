@@ -62,6 +62,8 @@ export default function Page(props: {
         
         if(channel_id) {
             fetchPosts(channel_id as string);
+
+            document.title = `Şelale - ${channel_id}`;
         }
     }, [router])
 

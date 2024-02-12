@@ -1,3 +1,3 @@
 export const allowedChannels: string[] = [
-    "anime", "politika", "genel"
+    "genel", "anime", "politika"
 ]

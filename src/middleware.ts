@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
   const url = request.url.split("/");
 
   if(!isUrlAllowed(request.url)) {
-    return NextResponse.redirect(new URL("/channel/genel", request.url));
+    return NextResponse.redirect(new URL("/channel/genel?e=Bu kanala girişin engellendi.", request.url));
   }
   
 
