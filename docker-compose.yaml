@@ -1,0 +1,27 @@
+version: '3'
+services:
+  nextjs-app:
+    image: node
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.dev
+    command: bash -c "npx prisma db push && npm run dev"
+    networks:
+      - common_net
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: cikolataselalesi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    networks:
+      - common_net
+  
+networks:
+  common_net: {}

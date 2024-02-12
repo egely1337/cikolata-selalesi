@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html, body, #__next {
+    background-color: #4d2e07;
+    overflow: hidden;
+    scrollbar-width: 0;
+}
+
+.page {
+    @apply flex justify-center flex-row max-h-screen;
+}
