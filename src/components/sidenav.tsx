@@ -18,7 +18,7 @@ export default function Sidenav() {
 
 
     return(
-        <div className="h-screen text-white flex flex-col p-4 pt-32 pl-32 w-1/5">
+        <div className="h-screen text-white overflow-hidden flex flex-col p-4 pt-32 pl-32 w-1/5">
             <GiChocolateBar size={72} className="mb-12 opacity-70 hover:opacity-100 ease-in-out duration-1000"/>
 
             <div className="flex flex-row gap-2 select-none">
@@ -45,7 +45,7 @@ export default function Sidenav() {
             </div>
 
             <div className="h-full flex items-end">
-                <div onClick={() => router.push("/logout")} className="flex pb-12 rounded-2xl hover:bg-[#672f0a] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
+                <div onClick={() => router.push("/logout")} className="flex rounded-2xl hover:bg-[#672f0a] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
                     <IoExit size={32}/>
                     <span className={`${inter.className} text-xl font-bold ml-2`}>Çıkış Yap</span>
                 </div>

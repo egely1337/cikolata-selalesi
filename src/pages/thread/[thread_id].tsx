@@ -47,12 +47,8 @@ export default function Page(props: {
     }
 
     async function getComments(postId: string) {
-        await fetch("/api/comments", {
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify({
-                postId: postId
-            }),
-            method: "POST"
+        await fetch(`/api/comments/${postId}`, {
+            method: "GET"
         }).then(async res => {
             const json = await res.json();
 
