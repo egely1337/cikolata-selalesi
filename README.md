@@ -14,3 +14,8 @@
 - **Hesap Oluşturma 👤**
 - **Gönderi Yayınlama 📃**
 - **Kanallarda gezinme 🐧**
+
+<br/>
+<br/>
+
+**Çikolata Şelalesi 🍫 bir animekizi.org kuruluşudur**
