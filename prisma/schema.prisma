@@ -21,8 +21,14 @@ model User {
   posts Post[]
   likes Like[]
   comments Comment[]
-  notifications Notification[]
 }
+
+//model Notification {
+//  id String @id @default(uuid())
+//
+//  authorId String
+//  author User @relation(references: [username], fields: [authorId])
+//}
 
 model Post {
   id String @id @default(uuid())
@@ -38,13 +44,6 @@ model Post {
   attachments Attachment[]
   liked_by Like[]
   comments Comment[]
-}
-
-model Notification {
-  id String @id @default(uuid())
-
-  authorId String
-  author User @relation(references: [username], fields: [authorId])
 }
 
 model Comment {
