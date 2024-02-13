@@ -14,7 +14,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try { 
         const thread_id = req.query.thread_id as string;
         
-        const thread = await prisma.user.getThreadById(thread_id);
+        const session = await getServerSession(req, res, authOptions);
+        const thread = await prisma.user.getThreadById(thread_id, session);
 
         return res.json({
             status: true,

@@ -38,6 +38,8 @@ const prisma = new PrismaClient().$extends({
             async checkUserExists(username: string) {
                 return (await prisma.user.findUnique({where: {username: username}})) ? true : false;
             },
+
+
             async register(username: string, password: string) {
                 const hash = await bcrypt.hash(password, 10);
                 
@@ -67,6 +69,8 @@ const prisma = new PrismaClient().$extends({
                     
                 }) 
             },
+
+
             async login(username: string, password: string) {
                 const user = await prisma.user.findUnique({
                     where: {
@@ -82,6 +86,8 @@ const prisma = new PrismaClient().$extends({
                     return user;
                 }
             },
+
+
             async getUser(session: Session | null) {
                 if(!session) {
                     throw new Error("Bunun için giriş yapmalısın.");
@@ -103,6 +109,8 @@ const prisma = new PrismaClient().$extends({
 
                 throw new Error("You should be login.");
             },
+
+
             async createPost(params: CreatePostType) {
                 if(params.session == null) {
                     throw new Error("You should be login.");
@@ -133,12 +141,23 @@ const prisma = new PrismaClient().$extends({
                                 liked_by: true,
                                 comments: true
                             }
+                        },
+                        liked_by: {
+                            where: {
+                                authorId: user?.username
+                            }
                         }
                     },
                     
                 })
             },
-            async getChannelPosts(channel_id: string) {
+
+
+            async getChannelPosts(channel_id: string, session: Session | null) {
+                if(!session) {
+                    throw new Error("Giriş yapmalısın.");
+                }
+
                 return JSON.parse(JSON.stringify(await prisma.post.findMany({
                     take: 50,
                     orderBy: {
@@ -161,13 +180,22 @@ const prisma = new PrismaClient().$extends({
                                 liked_by: true,
                                 comments: true
                             }
+                        },
+                        liked_by: {
+                            where: {
+                                authorId: session.user?.name!
+                            }
                         }
                     },
                 })))
             },
+
+
             async getUserLike(username: string, threadId: string) {
                 return await prisma.like.findFirst({where: {authorId: username, postId: threadId}});
             },
+
+
             async userLikePost(params: LikePostType) {
                 if(!params.session) {
                     throw new Error("You should be login.");
@@ -175,6 +203,7 @@ const prisma = new PrismaClient().$extends({
 
                 const user = await this.getUser(params.session);
                 const user_like = await this.getUserLike(user?.username!, params.post_id);
+                const post = await this.getThreadById(params.post_id, params.session);
 
                 if(user_like) {
                     await prisma.like.delete({
@@ -183,11 +212,11 @@ const prisma = new PrismaClient().$extends({
                         }
                     })
 
-                    return false;
+                    return await this.getThreadById(params.post_id, params.session);
                 }
 
                 if(user && !user_like) {
-                    return await prisma.like.create({
+                    await prisma.like.create({
                         data: {
                             author: {
                                 connect: {
@@ -196,13 +225,24 @@ const prisma = new PrismaClient().$extends({
                             },
                             post: {
                                 connect: {
-                                    id: params.post_id
-                                }
+                                    id: params.post_id,
+                                },
                             }
-                        }
-                    })
+                        },
+                    }).then(async res => {
+                        await this.createUserNotification(
+                            post.authorId,
+                            `${res.authorId} gönderini beğendi.`,
+                            res.authorId,
+                            `/thread/${res.postId}`
+                        )
+                    });
+
+                    return await this.getThreadById(params.post_id, params.session);
                 }
             },
+
+
             async getUserByUsername(username: string) {
                 return await prisma.user.findUnique({
                     where: {
@@ -215,10 +255,16 @@ const prisma = new PrismaClient().$extends({
                         avatar_url: true
                     }
                 }).catch(err => {
-                    throw new Error("Something gone wrong.");
+                    throw new Error("Bir şeyler yanlış gitti.");
                 });
             },
-            async getThreadById(threadId: string) {
+
+
+            async getThreadById(threadId: string, session: Session | null) {
+                if(!session) {
+                    throw new Error("Giriş yapmalısın");
+                }
+
                 return await prisma.post.findUnique({
                     where: {
                         id: threadId
@@ -236,6 +282,11 @@ const prisma = new PrismaClient().$extends({
                                 liked_by: true,
                                 comments: true
                             }
+                        },
+                        liked_by: {
+                            where: {
+                                authorId: session.user?.name!
+                            }
                         }
                     },
                 }).then(res => {
@@ -246,6 +297,8 @@ const prisma = new PrismaClient().$extends({
                     return res;
                 })
             },
+
+
             async checkUserLikedThread(session: Session, thread_id: string) {
                 const user = await this.getUser(session);
 
@@ -274,12 +327,15 @@ const prisma = new PrismaClient().$extends({
                     count: likeCount
                 }
             },
+
+
             async createComment(session: Session, postId: string, content: string) {
                 if(!session) {
                     throw new Error("You should be login.");
                 }
 
                 const user = await this.getUser(session);
+                const post = await this.getThreadById(postId, session);
                 
                 return await prisma.comment.create({
                     data: {
@@ -304,8 +360,13 @@ const prisma = new PrismaClient().$extends({
                             }
                         }
                     }
+                }).then(async (res) => {
+                    await this.createUserNotification(post.authorId, `@${user?.username} gönderine yorum paylaştı - ${res.content}`, user?.username!, `/thread/${res.postId}`);
+                    return res;
                 })
             },
+
+
             async getCommentsPost(postId: string) {
                 return JSON.parse(JSON.stringify(await prisma.comment.findMany({
                     take: 50,
@@ -325,6 +386,59 @@ const prisma = new PrismaClient().$extends({
                         }
                     }
                 })))
+            },
+
+            async getUserNotifactions(
+                session: Session | null,
+            ) {
+                if(!session) {
+                    throw new Error("You should be logged in")
+                }
+
+                return await prisma.notification.findMany({
+                    where: {
+                        authorId: session.user?.name!
+                    },
+                    take: 50,
+                    include: {
+                        fromUser: {
+                            select: {
+                                avatar_url: true,
+                                username: true,
+                                created_at: true
+                            }
+                        }
+                    },
+                    orderBy: {
+                        created_at: 'desc'
+                    }
+                })
+            },
+            async createUserNotification(
+                toUserId: string,
+                desc: string,
+                fromUserId: string,
+                href: string
+            ) {
+                if(toUserId === fromUserId) return;
+                
+                await prisma.notification.create({
+                    data: {
+                        author: {
+                            connect: {
+                                username: toUserId
+                            }
+                        },
+                        fromUser: {
+                            connect: {
+                                username: fromUserId
+                            }
+                        },
+                        desc: desc,
+                        href: href,
+                        read: false
+                    },
+                })
             }
         }
     }

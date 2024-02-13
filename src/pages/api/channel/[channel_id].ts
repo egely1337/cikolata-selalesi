@@ -17,7 +17,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try { 
         const channel_id = req.query.channel_id as string;
-        const post = await prisma.user.getChannelPosts(channel_id);
+        const session = await getServerSession(req, res, authOptions);
+
+        const post = await prisma.user.getChannelPosts(channel_id, session);
 
         return res.json({
             status: true,

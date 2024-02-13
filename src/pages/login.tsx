@@ -45,7 +45,7 @@ export default function Page(props: {
             })
           }
           
-          router.push("/");
+          router.push("/channel/genel");
         }, 1000);
       } else {
         toast.error(res?.error ?? "undefined");

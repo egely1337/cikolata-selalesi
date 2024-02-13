@@ -21,14 +21,26 @@ model User {
   posts Post[]
   likes Like[]
   comments Comment[]
+  notifactions Notification[] @relation("Notifactions")
+  sentNotifactions Notification[] @relation("SentNotifactions")
 }
 
-//model Notification {
-//  id String @id @default(uuid())
-//
-//  authorId String
-//  author User @relation(references: [username], fields: [authorId])
-//}
+model Notification {
+  id String @id @default(uuid())
+
+  authorId String
+  author User @relation("Notifactions", references: [username], fields: [authorId])
+  
+  fromUserId String
+  fromUser User @relation("SentNotifactions",references: [username], fields: [fromUserId])
+
+  href String
+
+  created_at DateTime @default(now())
+
+  read Boolean @default(false)
+  desc String
+}
 
 model Post {
   id String @id @default(uuid())

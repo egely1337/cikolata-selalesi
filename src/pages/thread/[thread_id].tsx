@@ -5,6 +5,7 @@ import Sidenav from "@/components/sidenav";
 import Thread from "@/components/thread";
 import Trendings from "@/components/trendings";
 import UserPostArea from "@/components/user_post_area";
+import { PostType } from "@/types/post";
 
 
 import { Comment as CommentType, Post, User } from "@prisma/client";
@@ -22,7 +23,7 @@ export default function Page(props: {
 
     const router = useRouter();
 
-    const [post, setPost] = React.useState<Post & {author: User}>();
+    const [post, setPost] = React.useState<PostType>();
     const [comments, setComments] = React.useState<CommentExtended[]>();
     const [replyId, setReplyId] = React.useState<string>("");
 

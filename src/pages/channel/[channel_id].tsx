@@ -3,27 +3,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 import React from "react";
 
-import { Post, User } from "@prisma/client";
 import Sidenav from "@/components/sidenav";
 import Thread from "@/components/thread";
-import { IoSend } from "react-icons/io5";
-import { useUserStore } from "@/lib/store";
-import { FaOptinMonster } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import Trendings from "@/components/trendings";
 import MainLayout from "@/components/main_layout";
 import UserPostArea from "@/components/user_post_area";
 import { useRouter } from "next/router";
 import Loading from "@/components/loading";
+import { PostType } from "@/types/post";
 
 
 export default function Page(props: {
 
 }) {
-    type PostType = Post & {
-        author: User
-    }
-
     const [posts, setPosts] = React.useState<PostType[]>();
     const router = useRouter();
 
@@ -77,7 +69,7 @@ export default function Page(props: {
                 }}/>
 
                 {posts ? <div className="p-4 flex flex-col">
-                    {posts?.map((val, i) => {
+                    {posts.map((val, i) => {
                         return(
                             <Thread
                                 key={i}
