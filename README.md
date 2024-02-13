@@ -1,4 +1,5 @@
 # **Çikolata Şelalesi 🍫**
+<br/>
 
 ## **Çikolata Şelalesi 🍫 nedir?**
 - Çikolata Şelalesi her türlü anonim insanın girip çeşitli kanallarda özgürce paylaşabileceği bir platformdur.
@@ -14,6 +15,7 @@
 - **Hesap Oluşturma 👤**
 - **Gönderi Yayınlama 📃**
 - **Kanallarda gezinme 🐧**
+- **Bildirimler 📰**
 
 <br/>
 <br/>
