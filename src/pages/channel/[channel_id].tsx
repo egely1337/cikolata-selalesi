@@ -68,7 +68,7 @@ export default function Page(props: {
                     sendPost(content);
                 }}/>
 
-                {posts ? <div className="p-4 flex flex-col">
+                {posts ? <div className="flex p-4 flex-col">
                     {posts.map((val, i) => {
                         return(
                             <Thread

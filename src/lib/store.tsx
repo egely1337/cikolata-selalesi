@@ -1,3 +1,4 @@
+import { NotificationType } from "@/types/notification"
 import { User } from "@prisma/client"
 import { create } from "zustand"
 
@@ -11,12 +12,12 @@ export const useUserStore = create<UserState>()((set) => ({
     setUser: (newUser) => set((state) => ({ user: newUser})),
 }))
 
-interface UsersState {
-    users: User[]
-    addUser: (user: User) => void
+interface NotificationState {
+    notifications: NotificationType[]
+    setNotifications: (notifications: NotificationType[]) => void
 }
 
-export const useAvatarStore = create<UsersState>()((set) => ({
-    users: [],
-    addUser: (user) => set((state) => ({ users: [...state.users, user]})),
+export const useNotificationStore = create<NotificationState>()((set) => ({
+    notifications: [],
+    setNotifications: (notifications) => set((state) => ({ notifications: notifications})),
 }))

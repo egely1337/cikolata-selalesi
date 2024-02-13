@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react";
 
 import type { AppProps } from "next/app";
 import React from "react";
-import { useUserStore } from "@/lib/store";
+import { useNotificationStore, useUserStore } from "@/lib/store";
 import { User } from "@prisma/client";
 import { useRouter } from "next/router";
 
@@ -13,6 +13,7 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
 
   const router = useRouter();
   const userStore = useUserStore();
+  const notificationsStore = useNotificationStore();
 
   React.useEffect(() => {
     if(userStore.user == null) 
@@ -28,6 +29,24 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
       }
     })
 
+  }, [])
+
+  React.useEffect(() => {
+      async function getNotifications() {
+        await fetch("/api/me/notifications", {
+            method: "GET"
+        }).then(async res => {
+            const json = await res.json();
+
+            //@ts-ignore
+            notificationsStore.setNotifications(json.notifications);
+        })
+      }
+      getNotifications();
+
+      setInterval(async () => {
+        await getNotifications();
+      }, 5000);
   }, [])
 
   React.useEffect(() => {

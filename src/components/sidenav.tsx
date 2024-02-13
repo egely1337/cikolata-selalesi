@@ -1,5 +1,5 @@
 import useUser from "@/hooks/user";
-import { useUserStore } from "@/lib/store";
+import { useNotificationStore, useUserStore } from "@/lib/store";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
@@ -14,6 +14,7 @@ import { GiChocolateBar } from "react-icons/gi";
 
 export default function Sidenav() {
     const userStore = useUserStore();
+    const notificationsStore = useNotificationStore();
     const router = useRouter();
 
 
@@ -39,8 +40,11 @@ export default function Sidenav() {
                 <span className={`${inter.className} text-xl font-bold ml-2`}>Ayarlar</span>
             </div>
 
-            <div onClick={() => router.push("/notifications")} className="flex rounded-2xl hover:bg-[#c3883d] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
+            <div onClick={() => router.push("/notifications")} className="relative flex rounded-2xl hover:bg-[#c3883d] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
                 <IoMdNotifications size={32}/>
+                <div className="absolute left-1 top-2 px-2 bg-[#c3883d] flex items-center justify-center p-1 rounded-full">
+                    <span className="text-xs">{notificationsStore.notifications.length}</span>
+                </div>
                 <span className={`${inter.className} text-xl font-bold ml-2`}>Bildirimler</span>
             </div>
 
