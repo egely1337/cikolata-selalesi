@@ -12,11 +12,13 @@
 - Hayır, **Çikolata Şelalesi 🍫** bulunduğumuz süreç boyunca aktif geliştirilen bir projedir. Halka açık olması halen mantıklı değildir.
 
 ## **Çikolata Şelalesi 🍫 Özellikleri**
-- **Hesap Oluşturma 👤**
-- **Gönderi Yayınlama 📃**
-- **Kanallarda gezinme 🐧**
-- **Bildirimler 📰**
-
+- [x] **Hesap oluşturma 👤**
+- [x] **Gönderi yayınlama 📃**
+- [x] **Kanallarda gezinme 🐧**
+- [x] **Bildirimler 📰**
+- [ ] **Profilleri gezme 🫂** 
+- [ ] **Resim yükleme 🖼️** 
+- [ ] **Şelale landpage 🏠** 
 <br/>
 <br/>
 
