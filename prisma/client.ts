@@ -127,8 +127,15 @@ const prisma = new PrismaClient().$extends({
                                 username: true,
                                 created_at: true
                             }
+                        },
+                        _count: {
+                            select: {
+                                liked_by: true,
+                                comments: true
+                            }
                         }
-                    }
+                    },
+                    
                 })
             },
             async getChannelPosts(channel_id: string) {
@@ -151,7 +158,8 @@ const prisma = new PrismaClient().$extends({
                         },
                         _count: {
                             select: {
-                                liked_by: true
+                                liked_by: true,
+                                comments: true
                             }
                         }
                     },
@@ -225,7 +233,8 @@ const prisma = new PrismaClient().$extends({
                         },
                         _count: {
                             select: {
-                                liked_by: true
+                                liked_by: true,
+                                comments: true
                             }
                         }
                     },

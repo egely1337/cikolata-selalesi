@@ -29,23 +29,23 @@ export default function Sidenav() {
                 </div>
             </div>
 
-            <div onClick={() => router.push("/channel/genel")} className="flex rounded-2xl hover:bg-[#672f0a] cursor-pointer duration-300 p-2 py-3 flex-row mt-12 items-center gap-2 w-64">
+            <div onClick={() => router.push("/channel/genel")} className="flex rounded-2xl hover:bg-[#c3883d] cursor-pointer duration-300 p-2 py-3 flex-row mt-12 items-center gap-2 w-64">
                 <IoMdHome size={32}/>
                 <span className={`${inter.className} text-xl font-bold ml-2`}>Anasayfa</span>
             </div>      
 
-            <div onClick={() => router.push("/settings")} className="flex rounded-2xl hover:bg-[#672f0a] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64">
+            <div onClick={() => router.push("/settings")} className="flex rounded-2xl hover:bg-[#c3883d] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64">
                 <IoSettings size={32}/>
                 <span className={`${inter.className} text-xl font-bold ml-2`}>Ayarlar</span>
             </div>
 
-            <div onClick={() => router.push("/notifications")} className="flex rounded-2xl hover:bg-[#672f0a] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
+            <div onClick={() => router.push("/notifications")} className="flex rounded-2xl hover:bg-[#c3883d] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
                 <IoMdNotifications size={32}/>
                 <span className={`${inter.className} text-xl font-bold ml-2`}>Bildirimler</span>
             </div>
 
             <div className="h-full flex items-end">
-                <div onClick={() => router.push("/logout")} className="flex rounded-2xl hover:bg-[#672f0a] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
+                <div onClick={() => router.push("/logout")} className="flex rounded-2xl hover:bg-[#c3883d] duration-300 cursor-pointer p-2 py-3 flex-row mt-3 items-center gap-2 w-64 self-justify--end">
                     <IoExit size={32}/>
                     <span className={`${inter.className} text-xl font-bold ml-2`}>Çıkış Yap</span>
                 </div>
