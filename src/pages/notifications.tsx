@@ -38,6 +38,7 @@ export default function Page(props: {
                 {notifications?.map((val, i) => {
                     return(
                         <Notification
+                            key={i}
                             notification={val}
                         />
                     )
