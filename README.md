@@ -16,7 +16,7 @@
 - [x] **Gönderi yayınlama 📃**
 - [x] **Kanallarda gezinme 🐧**
 - [x] **Bildirimler 📰**
-- [ ] **Profilleri gezme 🫂** 
+- [x] **Profilleri gezme 🫂** 
 - [ ] **Resim yükleme 🖼️** 
 - [ ] **Şelale landpage 🏠** 
 <br/>
