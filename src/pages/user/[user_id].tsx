@@ -63,7 +63,7 @@ export default function Page(props: {
                     <span className="text-white text-4xl font-bold mb-4">{`Gönderiler`}</span>
                     {user?.posts.map((val, i) => {
                     return(
-                        <Thread post={val}/>
+                        <Thread key={i} post={val}/>
                     )
                     })}
                 </div>

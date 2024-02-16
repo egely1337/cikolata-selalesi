@@ -6,9 +6,9 @@ services:
     volumes:
       - .:/app
     ports:
-      - "3000:3000"
+      - "3005:3000"
     env_file:
-      - .env.dev
+      - .env
     command: bash -c "npx prisma db push && npm run build && npm run start"
     networks:
       - common_net
