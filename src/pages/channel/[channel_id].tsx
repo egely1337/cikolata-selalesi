@@ -20,8 +20,6 @@ export default function Page(props: {
     const router = useRouter();
 
     async function fetchPosts(channel_id: string) {
-        setPosts([]);
-
         fetch(`/api/channel/${channel_id}`, {
             method: "GET",
         }).then(async res => {
