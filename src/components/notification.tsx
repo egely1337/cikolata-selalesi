@@ -13,7 +13,7 @@ export default function Notification(props: {
     return(
         <Link
             href={props.notification.href}
-            className="w-full p-4 flex flex-row items-center hover:bg-[#c3883d] duration-300"
+            className="w-full p-4 flex flex-row items-center hover:bg-mor border-b duration-300"
         >
             <img src={props.notification.fromUser.avatar_url} className="w-[64px] rounded-full h-[64px]" alt="" />
             <div className={`flex text-white flex-col ml-4 ${inter.className}`}>

@@ -37,7 +37,7 @@ export default function Thread(props: {
     }
 
     return(
-        <div className="p-4 text-white flex flex-col border-white hover:bg-[#c3883d] rounded-xl duration-300 cursor-pointer">
+        <div className="p-4 text-white border-b flex flex-col border-white hover:bg-mor duration-300 cursor-pointer">
             <Link href={`/user/${props.post.authorId}`} className="flex flex-row p-2 items-center">
                 <img draggable={false} src={props.post.author.avatar_url} className="rounded-full" width={48} />
                 <span className={`${inter.className} ml-4 font-bold`}>{props.post.authorId}</span>

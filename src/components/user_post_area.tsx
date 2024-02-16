@@ -10,7 +10,7 @@ export default function UserPostArea(props: {
     const [content, setContent] = React.useState<string>("");
 
     return(
-        <div className="w-full flex flex-row p-8">
+        <div className="w-full flex flex-row p-8 border-b">
             <img draggable={false} src={userStore.user?.avatar_url} className="rounded-full w-[48px] h-[48px]"/>
             <div 
                 className="w-full flex flex-col p-1 ml-4"

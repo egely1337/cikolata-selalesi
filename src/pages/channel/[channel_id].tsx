@@ -63,12 +63,12 @@ export default function Page(props: {
     return(
         <div className="page">
             <Sidenav/>
-            <MainLayout menuName={`Şelale - ${router.query?.channel_id}`}>
+            <MainLayout menuName={`Şelale - /${router.query?.channel_id}`}>
                 <UserPostArea onClick={async (content) => {
                     sendPost(content);
                 }}/>
 
-                {posts ? <div className="flex p-4 flex-col">
+                {posts ? <div className="flex flex-col">
                     {posts.map((val, i) => {
                         return(
                             <Thread
