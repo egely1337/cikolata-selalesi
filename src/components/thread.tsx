@@ -9,6 +9,7 @@ import { FaComments } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { PostType } from "@/types/post";
 import createClockString from "@/lib/createClockString";
+import Link from "next/link";
 
 export default function Thread(props: {
     post: PostType
@@ -37,13 +38,13 @@ export default function Thread(props: {
 
     return(
         <div className="p-4 text-white flex flex-col border-white hover:bg-[#c3883d] rounded-xl duration-300 cursor-pointer">
-            <div className="flex flex-row p-2 items-center">
+            <Link href={`/user/${props.post.authorId}`} className="flex flex-row p-2 items-center">
                 <img draggable={false} src={props.post.author.avatar_url} className="rounded-full" width={48} />
                 <span className={`${inter.className} ml-4 font-bold`}>{props.post.authorId}</span>
                 <span className={`${inter.className} ml-3 opacity-70`}>@{props.post.authorId} · {createClockString(`${props.post.created_at}`)}</span>
-            </div>
+            </Link>
             <div className="flex flex-col p-2">
-                <p>{props.post.content}</p>
+                <span className="max-w-2xl">{props.post.content}</span>
                 <div className="mt-4 flex items-center flex-row">
                     <span className={`${inter.className} font-bold opacity-70`}>{like.count}
                     </span>

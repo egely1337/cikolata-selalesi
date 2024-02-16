@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../prisma/client";
+import prisma from "../../../../prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if(req.method !== "GET") {
@@ -10,8 +12,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try { 
-        const username = req.query.username as string;
-        const user = await prisma.user.getUserByUsername(username);
+        const user_id = req.query.user_id as string;
+        
+        const session = await getServerSession(req, res, authOptions);
+        const user = await prisma.user.getUserByUsername(user_id, session);
+
         return res.json({
             status: true,
             user: user

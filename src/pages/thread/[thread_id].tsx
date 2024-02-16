@@ -63,7 +63,7 @@ export default function Page(props: {
         
         async function fetch_thread(thread_id: string) {
             if(thread_id) {
-                fetch(`http://localhost:3000/api/thread/${thread_id}`, {
+                fetch(`/api/thread/${thread_id}`, {
                     method: "GET"
                 }).then(async res => {
                     const json = await res.json();

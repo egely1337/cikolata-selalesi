@@ -6,9 +6,8 @@ export default function MainLayout(props: {
 }) {
     return(
         <div className="w-3/5 border-l border-r border-white h-screen overflow-auto text-black flex flex-col py-32">
-            <div className="flex flex-col">
+            <div className="flex flex-col border-b ">
                 <span className="text-4xl p-4 text-white font-bold mb-3">{`${props.menuName}`}</span>
-                <div className="bg-white w-full p-[0.1px] mb-7"/>
             </div>
             {props.children}
         </div>

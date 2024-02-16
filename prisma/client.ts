@@ -243,7 +243,11 @@ const prisma = new PrismaClient().$extends({
             },
 
 
-            async getUserByUsername(username: string) {
+            async getUserByUsername(username: string, session: Session | null) {
+                if(!session) {
+                    throw new Error("Giriş yapmalısın.");
+                }
+                
                 return await prisma.user.findUnique({
                     where: {
                         username: username
@@ -252,13 +256,34 @@ const prisma = new PrismaClient().$extends({
                         username: true,
                         created_at: true,
                         password: false,
-                        avatar_url: true
-                    }
+                        avatar_url: true,
+                        posts: {
+                            take: 20,
+                            include: {
+                                _count: {
+                                    select: {
+                                        liked_by: true
+                                    }
+                                },
+                                author: {
+                                    select: {
+                                        username: true,
+                                        created_at: true,
+                                        avatar_url: true
+                                    }
+                                },
+                                liked_by: {
+                                    where: {
+                                        authorId: session.user?.name!
+                                    }
+                                }
+                            }
+                        }
+                    },
                 }).catch(err => {
                     throw new Error("Bir şeyler yanlış gitti.");
                 });
             },
-
 
             async getThreadById(threadId: string, session: Session | null) {
                 if(!session) {
@@ -291,8 +316,8 @@ const prisma = new PrismaClient().$extends({
                     },
                 }).then(res => {
                     if(res == null) {
-                        throw new Error("Nothing found.");
-                    } 
+                        throw new Error("Bir sorun oluştu.");
+                    }
                     
                     return res;
                 })
