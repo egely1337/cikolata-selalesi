@@ -10,7 +10,7 @@ export default function UserPostArea(props: {
     const [content, setContent] = React.useState<string>("");
 
     return(
-        <div className="w-full flex flex-row p-8 border-b">
+        <div className="w-full flex flex-row p-8">
             <img draggable={false} src={userStore.user?.avatar_url} className="rounded-full w-[48px] h-[48px]"/>
             <div 
                 className="w-full flex flex-col p-1 ml-4"
@@ -23,7 +23,7 @@ export default function UserPostArea(props: {
                     value={content}
                 />
                 <button  
-                className="p-3 self-end bg-[#c3883d] hover:bg-[#5C2F27] text-white rounded-xl hover:bg-pink-700 mt-2"
+                className="p-3 self-end bg-white text-black rounded-xl hover:bg-mor hover:text-white mt-2"
                 onClick={async () => {props.onClick(content); setContent("");}}
                 ><IoSend/></button>
             </div>

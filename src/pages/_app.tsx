@@ -33,14 +33,16 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
 
   React.useEffect(() => {
       async function getNotifications() {
-        await fetch("/api/me/notifications", {
-            method: "GET"
-        }).then(async res => {
-            const json = await res.json();
+          await fetch("/api/me/notifications", {
+              method: "GET"
+          }).then(async res => {
+            if(res.status == 500) return;
 
-            //@ts-ignore
-            notificationsStore.setNotifications(json.notifications);
-        })
+              const json = await res.json();
+
+              //@ts-ignore
+              notificationsStore.setNotifications(json.notifications);
+          })
       }
       getNotifications();
 
