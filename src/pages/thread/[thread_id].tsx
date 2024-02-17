@@ -66,8 +66,13 @@ export default function Page(props: {
                 fetch(`/api/thread/${thread_id}`, {
                     method: "GET"
                 }).then(async res => {
+                    if(res.status !== 200) {
+                        router.push("/channel/genel?e=Gönderi bulunamadı.");
+                        return;
+                    }
+
                     const json = await res.json();
-                    
+
                     //@ts-ignore
                     setPost(json.thread);
                     getComments(json.thread.id);
@@ -92,7 +97,7 @@ export default function Page(props: {
                             return(
                                 <Comment
                                     onClick={(id) => {
-                                        setReplyId(id);
+                                        //TODO: setReplyId(id);
                                     }}
                                     key={i}
                                     comment={val}

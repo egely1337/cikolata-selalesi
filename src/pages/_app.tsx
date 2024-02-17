@@ -56,13 +56,21 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
     const {e} = router.query;
     
     if(e) {
-      toast.error(e as string);
+      toast.error(e as string, {
+        style: {
+          padding: '16px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   }, [router])
   
   return (
     <>
-      <Toaster/>
+      <Toaster
+        position="top-right"
+      />
       <SessionProvider session={session}>
           <Component {...pageProps} />
       </SessionProvider>

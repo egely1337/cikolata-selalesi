@@ -1,5 +1,7 @@
+import Comment from "@/components/comment";
 import Loading from "@/components/loading";
 import MainLayout from "@/components/main_layout";
+import UserProfileSelection from "@/components/profile_selection";
 import Sidenav from "@/components/sidenav";
 import Thread from "@/components/thread";
 import Trendings from "@/components/trendings";
@@ -25,7 +27,7 @@ export default function Page(props: {
         
         async function fetch_user(thread_id: string) {
             if(thread_id) {
-                fetch(`/api/user/${user_id}`, {
+                fetch(`/api/user/${user_id}/comments`, {
                     method: "GET"
                 }).then(async res => {
                     const json = await res.json();
@@ -59,11 +61,12 @@ export default function Page(props: {
                     </div>
                 </div>
 
+                <UserProfileSelection user={user}/>
                 <div className="p-8 flex flex-col">
-                    <span className="text-white text-4xl font-bold mb-4">{`Gönderiler`}</span>
-                    {user?.posts.map((val, i) => {
+                    <span className="text-white text-4xl font-bold mb-4">{`Yorumlar`}</span>
+                    {user?.comments.map((val, i) => {
                     return(
-                        <Thread key={i} post={val}/>
+                        <Comment key={i} comment={val} onClick={() => null}/>
                     )
                     })}
                 </div>

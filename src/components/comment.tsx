@@ -5,6 +5,7 @@ import React from "react";
 
 import { Comment as CommentType,User } from "@prisma/client";
 import Link from "next/link";
+import Markdown from "react-markdown";
 
 const MONTH_NAMES = [
     "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" 
@@ -30,7 +31,7 @@ export default function Comment(props: {
                     <span className={`${inter.className} ml-3 opacity-70`}>@{props.comment.authorId} · {`${new Date(props.comment.created_at).getDate()} ${MONTH_NAMES.at(new Date(props.comment.created_at).getMonth())}`}</span>
                 </Link>
                 <div className="flex flex-col p-2">
-                    <p>{props.comment.content}</p>
+                    <Markdown className={"markdown"}>{props.comment.content}</Markdown>
                 </div>
             </div>
         </div>

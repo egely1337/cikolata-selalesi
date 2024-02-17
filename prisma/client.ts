@@ -243,7 +243,7 @@ const prisma = new PrismaClient().$extends({
             },
 
 
-            async getUserByUsername(username: string, session: Session | null) {
+            async getUserPostsByUsername(username: string, session: Session | null) {
                 if(!session) {
                     throw new Error("Giriş yapmalısın.");
                 }
@@ -276,7 +276,56 @@ const prisma = new PrismaClient().$extends({
                                     where: {
                                         authorId: session.user?.name!
                                     }
+                                },
+                            },
+                            orderBy: {
+                                created_at: 'desc'
+                            }
+                        }
+                    },
+                }).catch(err => {
+                    throw new Error("Bir şeyler yanlış gitti.");
+                });
+            },
+
+            async getUserCommentsByUsername(username: string, session: Session | null) {
+                if(!session) {
+                    throw new Error("Giriş yapmalısın.");
+                }
+                
+                return await prisma.user.findUnique({
+                    where: {
+                        username: username
+                    },
+                    select: {
+                        username: true,
+                        created_at: true,
+                        password: false,
+                        avatar_url: true,
+                        comments: {
+                            take: 20,
+                            include: {
+                                author: {
+                                    select: {
+                                        username: true,
+                                        created_at: true,
+                                        avatar_url: true
+                                    }
+                                },
+                                post: {
+                                    include: {
+                                        author: {
+                                            select: {
+                                                username: true,
+                                                created_at: true,
+                                                avatar_url: true
+                                            }
+                                        }
+                                    }
                                 }
+                            },
+                            orderBy: {
+                                created_at: 'desc'
                             }
                         }
                     },
