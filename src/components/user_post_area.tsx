@@ -1,5 +1,4 @@
 import { useUserStore } from "@/lib/store";
-import { MDXEditor } from "@mdxeditor/editor";
 import React from "react";
 import { IoSend } from "react-icons/io5";
 
