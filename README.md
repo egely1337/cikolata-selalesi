@@ -17,7 +17,7 @@
 - [x] **Kanallarda gezinme 🐧**
 - [x] **Bildirimler 📰**
 - [x] **Profilleri gezme 🫂** 
-- [ ] **Resim yükleme 🖼️** 
+- [x] **Resim yükleme 🖼️ (url ile)** 
 - [ ] **Şelale landpage 🏠** 
 <br/>
 <br/>
