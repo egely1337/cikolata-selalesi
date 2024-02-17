@@ -29,8 +29,11 @@ html, body, #__next {
   ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(255, 255, 255, 0.3);
   }
-  
 
 .page {
     @apply flex justify-center flex-row max-h-screen;
+}
+
+.markdown > * {
+  all: revert;
 }

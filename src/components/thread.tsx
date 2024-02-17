@@ -3,13 +3,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 import React from "react";
 
-import { Post, User } from "@prisma/client";
 import { IoMdHeart } from "react-icons/io";
 import { FaComments } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { PostType } from "@/types/post";
 import createClockString from "@/lib/createClockString";
 import Link from "next/link";
+import Markdown from "react-markdown";
 
 export default function Thread(props: {
     post: PostType
@@ -44,10 +44,9 @@ export default function Thread(props: {
                 <span className={`${inter.className} ml-3 opacity-70`}>@{props.post.authorId} · {createClockString(`${props.post.created_at}`)}</span>
             </Link>
             <div className="flex flex-col p-2">
-                <span className="max-w-2xl">{props.post.content}</span>
+                <Markdown className={"markdown"}>{props.post.content}</Markdown>
                 <div className="mt-4 flex items-center flex-row">
-                    <span className={`${inter.className} font-bold opacity-70`}>{like.count}
-                    </span>
+                    <span className={`${inter.className} font-bold opacity-70`}>{like.count}</span>
                     <IoMdHeart onClick={async () => like_post()} className={`${
                         (like.liked) ? "text-red-600" : "text-gray-300"} z-20 ml-1 cursor-pointer`} size={24}/>
                     <span className={`${inter.className} font-bold opacity-70 ml-4`}>{props.post?._count?.comments ?? '0'}</span>

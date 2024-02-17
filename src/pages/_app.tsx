@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+
 import toast, { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 
