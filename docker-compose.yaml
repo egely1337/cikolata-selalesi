@@ -9,7 +9,7 @@ services:
       - "3005:3000"
     env_file:
       - .env
-    command: bash -c "npx prisma db push && npm run build && npm run start"
+    command: bash -c "npm i && npx prisma db push && npm run build && npm run start"
     networks:
       - common_net
   postgres:
