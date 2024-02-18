@@ -19,7 +19,7 @@ export default function Sidenav() {
 
 
     return(
-        <div className="h-screen text-white overflow-hidden flex flex-col p-4 pt-32 pl-32 w-1/5">
+        <div className="h-screen text-white hidden overflow-hidden lg:flex flex-col p-4 pt-32 pl-32 lg:w-1/5">
             <GiChocolateBar size={72} className="mb-12 opacity-70 hover:opacity-100 ease-in-out duration-1000"/>
 
             <div className="flex flex-row gap-2 select-none">

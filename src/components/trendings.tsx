@@ -12,7 +12,7 @@ export default function Trendings(props: {
 
 }) {
     return(
-        <div className="flex text-white h-screen w-1/5 flex justify-center items-center">
+        <div className="flex text-white h-screen w-1/5 lg:flex hidden justify-center items-center">
             <div className={`flex flex-col min-h-[70%] rounded-xl p-8 ${inter.className}`}>
                 <div className="flex flex-row justify-between gap-10">
                     <span className="text-xl font-bold mb-8">Meraklısına kanallar</span>

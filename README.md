@@ -18,6 +18,7 @@
 - [x] **Bildirimler 📰**
 - [x] **Profilleri gezme 🫂** 
 - [x] **Resim yükleme 🖼️ (url ile)** 
+- [ ] **Yorumlara beğeni ve yanıt atma 🙏** 
 - [ ] **Şelale landpage 🏠** 
 <br/>
 <br/>
