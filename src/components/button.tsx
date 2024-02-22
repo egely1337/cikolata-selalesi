@@ -10,7 +10,7 @@ export default function Button(props: {
   }) {
     return(
       <button 
-        className={`${props.className} py-4 font-bold rounded-xl bg-[#CF1CEC] duration-300 hover:bg-pink-600 text-white ${inter.className}`}
+        className={`${props.className} py-4 font-bold rounded-xl bg-[#272829] duration-300 hover:bg-[#61677A] text-white ${inter.className}`}
         onClick={() => props.onClick()}  
       >{props.text}</button>
     )
