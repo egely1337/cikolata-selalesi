@@ -29,8 +29,6 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
         setTimeout(() => {
           userStore.setUser(json.user);
         }, 1000);
-      } else {
-        userStore.setUser({});
       }
     })
 
