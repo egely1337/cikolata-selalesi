@@ -29,6 +29,8 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
         setTimeout(() => {
           userStore.setUser(json.user);
         }, 1000);
+      } else {
+        userStore.setUser({});
       }
     })
 
@@ -70,7 +72,7 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
   
   return (
     <>
-      {(userStore.user != null) ? 
+      {(userStore.user != null && ["/login", "/register"].some((val) => (router.pathname.includes(val) ? true : false))) ? 
         <>
           <Toaster
             position="top-right"

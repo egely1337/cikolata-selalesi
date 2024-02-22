@@ -3,7 +3,7 @@ import { User } from "@prisma/client"
 import { create } from "zustand"
 
 interface UserState {
-    user: User | null
+    user: User | null | {}
     setUser: (newUser: User) => void
 }
   
