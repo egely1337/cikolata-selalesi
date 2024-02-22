@@ -16,10 +16,12 @@ import { PostType } from "@/types/post";
 export default function Page(props: {
 
 }) {
-    const [posts, setPosts] = React.useState<PostType[]>();
+    const [posts, setPosts] = React.useState<PostType[] | null>();
     const router = useRouter();
 
     async function fetchPosts(channel_id: string) {
+        setPosts(null);
+
         fetch(`/api/channel/${channel_id}`, {
             method: "GET",
         }).then(async res => {

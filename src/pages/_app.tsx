@@ -8,6 +8,7 @@ import React from "react";
 import { useNotificationStore, useUserStore } from "@/lib/store";
 import { User } from "@prisma/client";
 import { useRouter } from "next/router";
+import { GiChocolateBar } from "react-icons/gi";
 
 
 export default function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
@@ -18,15 +19,16 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
 
   React.useEffect(() => {
     if(userStore.user == null) 
-    fetch("/api/me", {
-      method: "GET"
-    }).then(async res => {
-      const json: {status: boolean, user: User} = await res.json();
-      
+      fetch("/api/me", {
+        method: "GET"
+      }).then(async res => {
+        const json: {status: boolean, user: User} = await res.json();
+        
 
       if(json.status) {
-        userStore.setUser(json.user);
-        console.log("user store added.");
+        setTimeout(() => {
+          userStore.setUser(json.user);
+        }, 1000);
       }
     })
 
@@ -68,12 +70,24 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
   
   return (
     <>
-      <Toaster
-        position="top-right"
-      />
-      <SessionProvider session={session}>
-          <Component {...pageProps} />
-      </SessionProvider>
+      {(userStore.user != null) ? 
+        <>
+          <Toaster
+            position="top-right"
+          />
+          <SessionProvider session={session}>
+              <Component {...pageProps} />
+          </SessionProvider>
+        </>
+        : <>
+          <div className="w-full h-screen flex items-center justify-center">
+          <GiChocolateBar 
+            size={144} 
+            className="text-white opacity-80 animate-ping"  
+          />
+          </div>  
+        </>
+      } 
     </>  
   );
 }
