@@ -16,6 +16,7 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
   const router = useRouter();
   const userStore = useUserStore();
   const notificationsStore = useNotificationStore();
+  const [isRequestDone, setRequestDone] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if(userStore.user == null) 
@@ -30,6 +31,8 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
           userStore.setUser(json.user);
         }, 1000);
       }
+
+      setRequestDone(true);
     })
 
   }, [])
@@ -70,7 +73,7 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
   
   return (
     <>
-      {(userStore.user != null && ["/login", "/register"].some((val) => (router.pathname.includes(val) ? true : false))) ? 
+      {(isRequestDone) ? 
         <>
           <Toaster
             position="top-right"
